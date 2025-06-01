@@ -143,7 +143,7 @@ input = """
 ~	~	~	~	~	~	4F-8	~	5Eb-8	~	5Db-8	~	5C-8	~	4Ab-8	~
 
 2Ab-8	~	3F-8	~	3Ab-8	~	4C-8	~	3C-8	~	3Ab-8	~	4C-8	~	4Eb-8	~
-3Db-8	~	3Ab-8		4Db-8	~	4Eb-8		2Bb-8	~	3F-8	~	4Db-8	~	4C-8	~
+3Db-8	~	3Ab-8	~	4Db-8	~	4Eb-8	～	2Bb-8	~	3F-8	~	4Db-8	~	4C-8	~
 """
 
 print(convert_music_notation(input))
