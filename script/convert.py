@@ -3,6 +3,14 @@ from pydantic import BaseModel
 
 
 DEFAULT_VELOCITY = "8"
+OUTPUT_NUMBER = 4
+DEFAULT_TEMPLATE = """
+#1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#
+#................................#
+#................................#
+#................................#
+#................................#
+"""
 
 
 class NodeInfo(BaseModel):
@@ -137,6 +145,9 @@ def convert_music_notation(input_text: str) -> str:
     for segment in segments:
         segment_result = _convert_segment(segment)
         results.append(segment_result)
+
+    while len(results) < OUTPUT_NUMBER:
+        results.append(DEFAULT_TEMPLATE)
 
     # 用空行连接多个乐段
     return "\n\n".join(results)
