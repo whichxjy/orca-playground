@@ -1,42 +1,55 @@
 import re
 
-def parse_music_notation(input_text):
-    """解析输入文本为多个乐段的音符和符号序列"""    # 检查是否包含全角波浪线
-    if "～" in input_text:
-        raise ValueError("输入包含全角波浪线'～'，请使用ASCII波浪线'~'代替")[[1]]
-    # 按空行分割多个乐段
-    paragraphs = re.split(r'\n\s*\n', input_text.strip())
-    all_segments = []
+
+DEFAULT_VELOCITY = "8"
+
+
+def is_halfwidth(char: str) -> bool:
+    # 控制字符 (U+0000 到 U+001F) 和 DEL (U+007F)
+    if ord(char) <= 0x1F or ord(char) == 0x7F:
+        return True
+    # ASCII字符 (U+0020 到 U+007E)
+    if 0x20 <= ord(char) <= 0x7E:
+        return True
+    # 半角片假名 (U+FF61 到 U+FF9F)
+    if 0xFF61 <= ord(char) <= 0xFF9F:
+        return True
+    return False
+
+
+def _parse_music_notation(input_text: str) -> list[str]:
+    for c in input_text:
+        if not is_halfwidth(c):
+            raise ValueError("invalid input")
+
+    paragraphs = re.split(r"\n\s*\n", input_text.strip())
+    all_segments: list[str] = []
 
     for paragraph in paragraphs:
-        lines = [line.strip() for line in paragraph.split('\n') if line.strip()]
+        lines = [line.strip() for line in paragraph.split("\n") if line.strip()]
         segment_positions = []
 
         for line in lines:
-            # 使用正则表达式拆分，可以处理多个空格和制表符
-            line_positions = re.split(r'\s+', line)
+            line_positions = re.split(r"\s+", line)
             segment_positions.append(line_positions)
 
-        # 展平每个乐段的二维列表
         flattened_segment = []
         for row in segment_positions:
             flattened_segment.extend(row)
 
-        # 确保每个乐段有32个位置
         if len(flattened_segment) != 32:
-            raise ValueError(f"每个乐段必须包含32个位置，当前有 {len(flattened_segment)} 个")
+            raise ValueError("must be 32 notes each segments")
 
         all_segments.append(flattened_segment)
-
     return all_segments
 
-def convert_note(note_str):
-    """转换单个音符格式"""
-    if note_str == 'x':  # 休止符
+
+def _convert_note(note_str: str) -> dict | None:
+    if note_str == "x":  # 休止符
         return None
 
     # 匹配格式: 八度+音符+可选的-+力度
-    match = re.match(r'(\d)([A-G][b#]?)(?:-(\d+))?', note_str)
+    match = re.match(r"(\d)([A-G][b#]?)(?:-(\d+))?", note_str)
     if not match:
         return None
 
@@ -45,20 +58,8 @@ def convert_note(note_str):
 
     # 处理音符转换
     white_keys = ["C", "D", "E", "F", "G", "A", "B"]
-    flat_map = {
-        "Db": "c",
-        "Eb": "d",
-        "Gb": "f",
-        "Ab": "g",
-        "Bb": "a"
-    }
-    sharp_map = {
-        "C#": "c",
-        "D#": "d",
-        "F#": "f",
-        "G#": "g",
-        "A#": "a"
-    }
+    flat_map = {"Db": "c", "Eb": "d", "Gb": "f", "Ab": "g", "Bb": "a"}
+    sharp_map = {"C#": "c", "D#": "d", "F#": "f", "G#": "g", "A#": "a"}
 
     if note in white_keys:
         converted_note = note
@@ -69,32 +70,28 @@ def convert_note(note_str):
     else:
         converted_note = note.lower()
 
-    velocity = velocity if velocity else "8"  # 默认力度为8
+    velocity = velocity if velocity else DEFAULT_VELOCITY
+    return {"octave": str(octave), "note": converted_note, "velocity": velocity}
 
-    return {
-        "octave": str(octave),
-        "note": converted_note,
-        "velocity": velocity
-    }
 
-def convert_segment(positions):
+def _convert_segment(positions):
     """转换单个乐段"""
     # 初始化输出行
-    octave_line = ['.' for _ in range(32)]
-    note_line = ['.' for _ in range(32)]
-    velocity_line = ['.' for _ in range(32)]
-    duration_line = ['.' for _ in range(32)]
+    octave_line = ["." for _ in range(32)]
+    note_line = ["." for _ in range(32)]
+    velocity_line = ["." for _ in range(32)]
+    duration_line = ["." for _ in range(32)]
 
     i = 0
     while i < len(positions):
         pos = positions[i]
 
-        if pos == '~' or pos == 'x':
+        if pos == "~" or pos == "x":
             i += 1
             continue
 
         # 处理音符
-        note_info = convert_note(pos)
+        note_info = _convert_note(pos)
         if not note_info:
             i += 1
             continue
@@ -107,7 +104,7 @@ def convert_segment(positions):
         # 计算持续时间
         duration = 1
         j = i + 1
-        while j < len(positions) and positions[j] == '~':
+        while j < len(positions) and positions[j] == "~":
             duration += 1
             j += 1
 
@@ -122,23 +119,23 @@ def convert_segment(positions):
         "#" + "".join(octave_line) + "#",
         "#" + "".join(note_line) + "#",
         "#" + "".join(velocity_line) + "#",
-        "#" + "".join(duration_line) + "#"
+        "#" + "".join(duration_line) + "#",
     ]
 
     return "\n".join(result)
 
-def convert_music_notation(input_text):
-    """将自定义音乐文本转换为指定格式，支持多段"""
-    segments = parse_music_notation(input_text)
 
-    # 转换每个乐段并合并结果
-    results = []
+def convert_music_notation(input_text: str) -> str:
+    segments = _parse_music_notation(input_text)
+
+    results: list[str] = []
     for segment in segments:
-        segment_result = convert_segment(segment)
+        segment_result = _convert_segment(segment)
         results.append(segment_result)
 
     # 用空行连接多个乐段
     return "\n\n".join(results)
+
 
 input = """
 5C-8	~	~	~	4F-8	~	~	~	4Ab-8	~	~	~	~	~	4Ab-8	4F-8
