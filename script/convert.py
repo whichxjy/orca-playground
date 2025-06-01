@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 OUTPUT_NUMBER = 4
 RESULT_JOIN_STR = (8 * ("\n" + ("." * 34))) + "\n"
-DEFAULT_VELOCITY = "8"
 DEFAULT_TEMPLATE = """
 #1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#
 #................................#
@@ -73,10 +72,10 @@ def _convert_note(note_str: str) -> NodeInfo | None:
     if note_str == "x":  # 休止符
         return None
 
-    # 匹配格式: 八度+音符+可选的-+力度
-    match = re.match(r"(\d)([A-G][b#]?)(?:-([0-9A-F]+))?", note_str)
+    # 匹配格式: 八度+音符+力度
+    match = re.match(r"(\d)([A-G][b#]?)-([0-9A-F]+)", note_str)
     if not match:
-        return None
+        raise ValueError(f"invalid note: {note_str}")
 
     octave, note, velocity = match.groups()
     octave = int(octave) - 1  # 转换八度表示
@@ -95,7 +94,6 @@ def _convert_note(note_str: str) -> NodeInfo | None:
     else:
         converted_note = note.lower()
 
-    velocity = velocity if velocity else DEFAULT_VELOCITY
     return NodeInfo(octave=str(octave), note=converted_note, velocity=velocity)
 
 
