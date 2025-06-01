@@ -46,5 +46,21 @@ x	x	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	4G-A	~	~	~	~	~
 ~	~	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	4G-A	~	4F-A-6	~	~	~
 """
 
-__patterns__: list[str] = [pattern0, pattern1, pattern2, pattern3, pattern4, pattern5]
+pattern6 = """
+x	x	5F-A	~	5G-A	~	5Ab-A	~	6C-A	~	5G-A	~	~	~	~	~
+~	~	5F-A	~	5G-A	~	5Ab-A	~	6C-A	~	~	5G-A	~	5F-A	~	~
+
+x	x	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	4G-A	~	~	~	~	~
+~	~	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	~	4G-A	~	4F-A	~	~
+"""
+
+__patterns__: list[str] = [
+    pattern0,
+    pattern1,
+    pattern2,
+    pattern3,
+    pattern4,
+    pattern5,
+    pattern6,
+]
 __output_path__ = "project/patterns"
