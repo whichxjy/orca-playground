@@ -17,6 +17,7 @@ class NodeInfo(BaseModel):
     octave: str
     note: str
     velocity: str
+    explicit_duration: str | None
 
 
 def _number_to_char(n: int) -> str:
@@ -73,11 +74,11 @@ def _convert_note(note_str: str) -> NodeInfo | None:
         return None
 
     # 匹配格式: 八度+音符+力度
-    match = re.match(r"(\d)([A-G][b#]?)-([0-9A-F]+)", note_str)
+    match = re.match(r"(\d)([A-G][b#]?)-([0-9A-F]+)(?:-([1-9]|[A-Z]))?", note_str)
     if not match:
         raise ValueError(f"invalid note: {note_str}")
 
-    octave, note, velocity = match.groups()
+    octave, note, velocity, duration = match.groups()
     octave = int(octave) - 1  # 转换八度表示
 
     # 处理音符转换
@@ -94,7 +95,12 @@ def _convert_note(note_str: str) -> NodeInfo | None:
     else:
         converted_note = note.lower()
 
-    return NodeInfo(octave=str(octave), note=converted_note, velocity=velocity)
+    return NodeInfo(
+        octave=str(octave),
+        note=converted_note,
+        velocity=velocity,
+        explicit_duration=duration if duration else None,
+    )
 
 
 def _convert_segment(positions: list[str]) -> str:
