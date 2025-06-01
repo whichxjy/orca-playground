@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 OUTPUT_NUMBER = 4
-RESULT_JOIN_STR = 9 * ("." * 32)
+RESULT_JOIN_STR = (9 * ("\n" + ("." * 34))) + "\n"
 DEFAULT_VELOCITY = "8"
 DEFAULT_TEMPLATE = """
 #1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#
@@ -159,7 +159,7 @@ def convert_music_notation(input_text: str) -> str:
     while len(results) < OUTPUT_NUMBER:
         results.append(DEFAULT_TEMPLATE)
 
-    return ("\n" * RESULT_JOIN_STR).join(results)
+    return RESULT_JOIN_STR.join(results)
 
 
 if __name__ == "__main__":
