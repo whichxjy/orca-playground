@@ -1,7 +1,9 @@
 import re
 
 def parse_music_notation(input_text):
-    """解析输入文本为多个乐段的音符和符号序列"""
+    """解析输入文本为多个乐段的音符和符号序列"""    # 检查是否包含全角波浪线
+    if "～" in input_text:
+        raise ValueError("输入包含全角波浪线'～'，请使用ASCII波浪线'~'代替")[[1]]
     # 按空行分割多个乐段
     paragraphs = re.split(r'\n\s*\n', input_text.strip())
     all_segments = []
@@ -143,7 +145,7 @@ input = """
 ~	~	~	~	~	~	4F-8	~	5Eb-8	~	5Db-8	~	5C-8	~	4Ab-8	~
 
 2Ab-8	~	3F-8	~	3Ab-8	~	4C-8	~	3C-8	~	3Ab-8	~	4C-8	~	4Eb-8	~
-3Db-8	~	3Ab-8	~	4Db-8	~	4Eb-8	～	2Bb-8	~	3F-8	~	4Db-8	~	4C-8	~
+3Db-8	~	3Ab-8	~	4Db-8	~	4Eb-8	~	2Bb-8	~	3F-8	~	4Db-8	~	4C-8	~
 """
 
 print(convert_music_notation(input))
