@@ -20,6 +20,15 @@ class NodeInfo(BaseModel):
     velocity: str
 
 
+def _number_to_char(n: int) -> str:
+    if n <= 9:
+        return str(n)  # 0-9 直接返回字符串
+    if n <= 35:
+        # 10-35 转换为 A-Z
+        return chr(ord("A") + n - 10)  # 使用ASCII码转换
+    return "Z"  # 如果超出范围，返回最大值 'Z'
+
+
 def _is_halfwidth(char: str) -> bool:
     # 控制字符 (U+0000 到 U+001F) 和 DEL (U+007F)
     if ord(char) <= 0x1F or ord(char) == 0x7F:
@@ -65,7 +74,7 @@ def _convert_note(note_str: str) -> NodeInfo | None:
         return None
 
     # 匹配格式: 八度+音符+可选的-+力度
-    match = re.match(r"(\d)([A-G][b#]?)(?:-(\d+))?", note_str)
+    match = re.match(r"(\d)([A-G][b#]?)(?:-([0-9A-F]+))?", note_str)
     if not match:
         return None
 
@@ -122,7 +131,7 @@ def _convert_segment(positions: list[str]) -> str:
             duration += 1
             j += 1
 
-        duration_line[i] = str(duration)
+        duration_line[i] = _number_to_char(duration)
         i += 1
 
     # 格式化输出
