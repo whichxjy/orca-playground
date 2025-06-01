@@ -23,6 +23,9 @@ pattern2 = """
 pattern3 = """
 4C-A	~	~	~	~	~	4C-A	4Eb-A	3Bb-A	~	~	~	~	~	4C-A	~
 4C-A	~	~	~	~	~	4C-A	4Eb-A	4F-A	~	~	~	~	~	4Eb-A	~
+
+2Ab-A	~	3Ab-A	~	3F-A	~	3Eb-A	~	2Eb-A	~	3Eb-A	~	3F-A	~	3Eb-A	~
+2Ab-A	~	3Ab-A	~	3F-A	~	3Eb-A	~	2Db-A	~	3Db-A	~	3Eb	~	3Db-A	~
 """
 
 patterns: list[str] = [pattern1, pattern2, pattern3]
