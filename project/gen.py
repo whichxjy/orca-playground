@@ -25,7 +25,7 @@ patterns: list[str] = [pattern1, pattern2]
 patterns_dir = Path("project/patterns")
 patterns_dir.mkdir(parents=True, exist_ok=True)
 for i, pattern in enumerate(patterns, start=1):
-    result = convert_music_notation(pattern)
+    result = convert_music_notation(pattern) + "\n"
 
     file_path = patterns_dir / f"pattern{i}.txt"
     with open(file_path, "w", encoding="utf-8") as f:
