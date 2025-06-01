@@ -1,6 +1,3 @@
-from script.convert import convert_music_notation
-from pathlib import Path
-
 pattern1 = """
 5C-8	~	~	~	4F-8	~	~	~	4Ab-8	~	~	~	~	~	4Ab-8	4F-8
 ~	~	~	~	~	~	4F-8	~	5Eb-8	~	5Db-8	~	5C-8	~	4Ab-8	~
@@ -28,14 +25,5 @@ pattern3 = """
 2Ab-A	~	3Ab-A	~	3F-A	~	3Eb-A	~	2Db-A	~	3Db-A	~	3Eb	~	3Db-A	~
 """
 
-patterns: list[str] = [pattern1, pattern2, pattern3]
-
-patterns_dir = Path("project/patterns")
-patterns_dir.mkdir(parents=True, exist_ok=True)
-for i, pattern in enumerate(patterns, start=1):
-    result = convert_music_notation(pattern) + "\n"
-
-    file_path = patterns_dir / f"pattern{i}.txt"
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(result)
-        print(f"generate pattern: {file_path}")
+__patterns__: list[str] = [pattern1, pattern2, pattern3]
+__output_path__ = "project/patterns"
