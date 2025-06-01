@@ -48,10 +48,10 @@ x	x	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	4G-A	~	~	~	~	~
 
 pattern6 = """
 x	x	5F-A	~	5G-A	~	5Ab-A	~	6C-A	~	5G-A	~	~	~	~	~
-~	~	5F-A	~	5G-A	~	5Ab-A	~	6C-A	~	~	5G-A	~	5F-A	~	~
+~	~	5F-A	~	5G-A	~	5Ab-9	~	6C-8	~	~	5G-7	~	5F-6	~	~
 
 x	x	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	4G-A	~	~	~	~	~
-~	~	4F-A	~	4G-A	~	4Ab-A	~	5C-A	~	~	4G-A	~	4F-A	~	~
+~	~	4F-A	~	4G-A	~	4Ab-9	~	5C-8	~	~	4G-7	~	4F-6	~	~
 """
 
 __patterns__: list[str] = [
