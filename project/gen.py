@@ -13,7 +13,7 @@ pattern2 = """
 6C-A	~	~	~	5F-A	~	~	~	5Ab-A	~	~	~	~	~	5Ab-A	5F-A
 ~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
-5C-A	x	x	x	4F-A	~	~	~	4Ab-A	~	~	~	~	~	4Ab-A	4F-A
+5C-A	~	~	~	4F-A	~	~	~	4Ab-A	~	~	~	~	~	4Ab-A	4F-A
 ~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
 2Ab-A	~	3F-A	~	3Ab-A	~	4C-A	~	3C-A	~	3Ab-A	~	4C-A	~	4Eb-A	~
