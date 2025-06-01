@@ -10,7 +10,7 @@ pattern1 = """
 """
 
 pattern2 = """
-6C-A	x	x	x	5F-A	~	~	~	5Ab-A	~	~	~	~	~	5Ab-A	5F-A
+6C-A	~	~	~	5F-A	~	~	~	5Ab-A	~	~	~	~	~	5Ab-A	5F-A
 ~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
 5C-A	x	x	x	4F-A	~	~	~	4Ab-A	~	~	~	~	~	4Ab-A	4F-A
