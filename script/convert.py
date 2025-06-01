@@ -4,7 +4,7 @@ import re
 DEFAULT_VELOCITY = "8"
 
 
-def is_halfwidth(char: str) -> bool:
+def _is_halfwidth(char: str) -> bool:
     # 控制字符 (U+0000 到 U+001F) 和 DEL (U+007F)
     if ord(char) <= 0x1F or ord(char) == 0x7F:
         return True
@@ -19,7 +19,7 @@ def is_halfwidth(char: str) -> bool:
 
 def _parse_music_notation(input_text: str) -> list[str]:
     for c in input_text:
-        if not is_halfwidth(c):
+        if not _is_halfwidth(c):
             raise ValueError("invalid input")
 
     paragraphs = re.split(r"\n\s*\n", input_text.strip())
@@ -74,9 +74,7 @@ def _convert_note(note_str: str) -> dict | None:
     return {"octave": str(octave), "note": converted_note, "velocity": velocity}
 
 
-def _convert_segment(positions):
-    """转换单个乐段"""
-    # 初始化输出行
+def _convert_segment(positions: list[str]) -> str:
     octave_line = ["." for _ in range(32)]
     note_line = ["." for _ in range(32)]
     velocity_line = ["." for _ in range(32)]
