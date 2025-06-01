@@ -1,3 +1,5 @@
+import re
+
 def convert_notes(input_notes: list[str]) -> list[str]:
     # 白键列表
     white_keys = ["C", "D", "E", "F", "G", "A", "B"]
@@ -35,15 +37,12 @@ def convert_notes(input_notes: list[str]) -> list[str]:
         result.append(new_note)
     return result
 
-# 示例输入
-# 原始字符串
+
 raw = """
 2Ab	~	3F	~	3Ab	~	4C	~	3C	~	3Ab	~	4C	~	4Eb	~
 3Db	~	3Ab		4Db	~	4Eb		2Bb	~	3F	~	4Db	~	4C	~
 """
 
-import re
-# 分割音符，去除空项
 notes = [n.strip() for n in re.split(r'[~\s]+', raw) if n.strip()]
 
 converted = convert_notes(notes)
