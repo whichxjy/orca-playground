@@ -1,28 +1,28 @@
 pattern1 = """
-5C-8	~	~	~	4F-8	~	~	~	4Ab-8	~	~	~	~	~	4Ab-8	4F-8
-~	~	~	~	~	~	4F-8	~	5Eb-8	~	5Db-8	~	5C-8	~	4Ab-8	~
+5C-3	~	~	~	4F-3	~	~	~	4Ab-3	~	~	~	~	~	4Ab-3	4F-3
+~	~	~	~	~	~	4F-3	~	5Eb-3	~	5Db-3	~	5C-3	~	4Ab-3	~
 
-2Ab-9	~	3F-9	~	3Ab-9	~	4C-9	~	3C-9	~	3Ab-9	~	4C-9	~	4Eb-9	~
-3Db-9	~	3Ab-9	~	4Db-9	~	4Eb-9	~	2Bb-9	~	3F-9	~	4Db-9	~	4C-9	~
+2Ab-3	~	3F-3	~	3Ab-3	~	4C-3	~	3C-3	~	3Ab-3	~	4C-3	~	4Eb-3	~
+3Db-3	~	3Ab-3	~	4Db-3	~	4Eb-3	~	2Bb-3	~	3F-3	~	4Db-3	~	4C-3	~
 """
 
 pattern2 = """
-6C-A	~	~	~	5F-A	~	~	~	5Ab-A	~	~	~	~	~	5Ab-A	5F-A
+6C-3	~	~	~	5F-3	~	~	~	5Ab-3	~	~	~	~	~	5Ab-3	5F-3
 ~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
-5C-A	~	~	~	4F-A	~	~	~	4Ab-A	~	~	~	~	~	4Ab-A	4F-A
+5C-3	~	~	~	4F-3	~	~	~	4Ab-3	~	~	~	~	~	4Ab-3	4F-3
 ~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
-2Ab-A	~	3F-A	~	3Ab-A	~	4C-A	~	3C-A	~	3Ab-A	~	4C-A	~	4Eb-A	~
-3Db-A	~	3Ab-A	~	4Db-A	~	4Eb-A	~	2Bb-A	~	3F-A	~	4Db-A	~	4C-A	~
+2Ab-3	~	3F-3	~	3Ab-3	~	4C-3	~	3C-3	~	3Ab-3	~	4C-3	~	4Eb-3	~
+3Db-3	~	3Ab-3	~	4Db-3	~	4Eb-3	~	2Bb-3	~	3F-3	~	4Db-3	~	4C-3	~
 """
 
 pattern3 = """
-4C-A	~	~	~	~	~	4C-A	4Eb-A	3Bb-A	~	~	~	~	~	4C-A	~
-4C-A	~	~	~	~	~	4C-A	4Eb-A	4F-A	~	~	~	~	~	4Eb-A	~
+4C-3	~	~	~	~	~	4C-3	4Eb-3	3Bb-3	~	~	~	~	~	4C-3	~
+4C-3	~	~	~	~	~	4C-3	4Eb-3	4F-3	~	~	~	~	~	4Eb-3	~
 
-2Ab-A	~	3Ab-A	~	3F-A	~	3Eb-A	~	2Eb-A	~	3Eb-A	~	3F-A	~	3Eb-A	~
-2Ab-A	~	3Ab-A	~	3F-A	~	3Eb-A	~	2Db-A	~	3Db-A	~	3Eb	~	3Db-A	~
+2Ab-3	~	3Ab-3	~	3F-3	~	3Eb-3	~	2Eb-3	~	3Eb-3	~	3F-3	~	3Eb-3	~
+2Ab-3	~	3Ab-3	~	3F-3	~	3Eb-3	~	2Db-3	~	3Db-3	~	3Eb	~	3Db-3	~
 """
 
 __patterns__: list[str] = [pattern1, pattern2, pattern3]
