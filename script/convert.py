@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 OUTPUT_NUMBER = 4
-RESULT_JOIN_STR = (9 * ("\n" + ("." * 34))) + "\n"
+RESULT_JOIN_STR = (8 * ("\n" + ("." * 34))) + "\n"
 DEFAULT_VELOCITY = "8"
 DEFAULT_TEMPLATE = """
 #1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#
