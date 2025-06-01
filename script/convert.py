@@ -1,7 +1,14 @@
 import re
+from pydantic import BaseModel
 
 
 DEFAULT_VELOCITY = "8"
+
+
+class NodeInfo(BaseModel):
+    octave: str
+    note: str
+    velocity: str
 
 
 def _is_halfwidth(char: str) -> bool:
@@ -44,7 +51,7 @@ def _parse_music_notation(input_text: str) -> list[str]:
     return all_segments
 
 
-def _convert_note(note_str: str) -> dict | None:
+def _convert_note(note_str: str) -> NodeInfo | None:
     if note_str == "x":  # 休止符
         return None
 
@@ -71,7 +78,7 @@ def _convert_note(note_str: str) -> dict | None:
         converted_note = note.lower()
 
     velocity = velocity if velocity else DEFAULT_VELOCITY
-    return {"octave": str(octave), "note": converted_note, "velocity": velocity}
+    return NodeInfo(octave=str(octave), note=converted_note, velocity=velocity)
 
 
 def _convert_segment(positions: list[str]) -> str:
@@ -95,9 +102,9 @@ def _convert_segment(positions: list[str]) -> str:
             continue
 
         # 添加音符信息
-        octave_line[i] = note_info["octave"]
-        note_line[i] = note_info["note"]
-        velocity_line[i] = note_info["velocity"]
+        octave_line[i] = note_info.octave
+        note_line[i] = note_info.note
+        velocity_line[i] = note_info.velocity
 
         # 计算持续时间
         duration = 1
