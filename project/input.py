@@ -1,4 +1,16 @@
-pattern0 = ""
+pattern0 = """
+5C-5	6C-5	~	~	~	~	~	4Bb-5	5C-5	6C-5	~	~	~	~	~	5C-5
+6Eb-5	6F-5	6Eb-5	7Eb-5	~	~	7C-5	~	~	~	~	~	6Eb-5	~	~	~
+
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+5Eb-5	5F-5	5Eb-5	x	x	x	x	x	x	x	x	x	5Eb-5	~	~	~
+
+2F-5	~	3F-5	~	3Ab-5	~	3Bb-5	~	3C-5	~	3Ab-5	~	3Bb-5	~	4Eb-5	~
+3Db-5	~	3Ab-5	~	5C-5	~	4F-5	~	2Bb-5	~	3Ab-5	~	4Db-5	~	4Ab-5	~
+
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+x	x	x	x	4C-5	~	x	x	x	x	x	x	x	x	x	x
+"""
 
 pattern1 = """
 5C-5	~	~	~	4F-5	~	~	~	4Ab-5	~	~	~	~	~	4Ab-5	4F-5
