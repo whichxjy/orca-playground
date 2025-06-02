@@ -1,3 +1,5 @@
+pattern0 = ""
+
 pattern1 = """
 5C-5	~	~	~	4F-5	~	~	~	4Ab-5	~	~	~	~	~	4Ab-5	4F-5
 ~	~	~	~	~	~	4F-5	~	5Eb-5	~	5Db-5	~	5C-5	~	4Ab-5	~
@@ -131,6 +133,7 @@ x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
 """
 
 __patterns__: list[str] = [
+    pattern0,
     pattern1,
     pattern2,
     pattern3,

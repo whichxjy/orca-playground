@@ -51,6 +51,9 @@ def _is_halfwidth(char: str) -> bool:
 
 
 def _parse_music_notation(input_text: str) -> list[str]:
+    if not input_text:
+        return []
+
     for c in input_text:
         if not _is_halfwidth(c):
             raise ValueError("invalid input")
