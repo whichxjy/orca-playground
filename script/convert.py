@@ -29,6 +29,14 @@ def _number_to_char(n: int) -> str:
     return "Z"  # 如果超出范围，返回最大值 'Z'
 
 
+def _char_to_number(c: str) -> int:
+    if "0" <= c <= "9":
+        return int(c)
+    if "A" <= c <= "Z":
+        return ord(c) - ord("A") + 10
+    raise ValueError(f"invalid char for numner: {c}")
+
+
 def _is_halfwidth(char: str) -> bool:
     # 控制字符 (U+0000 到 U+001F) 和 DEL (U+007F)
     if ord(char) <= 0x1F or ord(char) == 0x7F:
@@ -99,7 +107,7 @@ def _convert_note(note_str: str) -> NodeInfo | None:
         octave=str(octave),
         note=converted_note,
         velocity=velocity,
-        explicit_duration=duration if duration else None,
+        explicit_duration=duration if duration is not None else None,
     )
 
 
@@ -128,12 +136,18 @@ def _convert_segment(positions: list[str]) -> str:
         note_line[i] = note_info.note
         velocity_line[i] = note_info.velocity
 
-        # 计算持续时间
-        duration = 1
-        j = i + 1
-        while j < len(positions) and positions[j] == "~":
-            duration += 1
-            j += 1
+        print(f"{pos} => {note_info}")
+        # 确定持续时间
+        if note_info.explicit_duration is not None:
+            # 使用显式指定的持续时间
+            duration = _char_to_number(note_info.explicit_duration)
+        else:
+            # 使用原来的规则计算持续时间
+            duration = 1
+            j = i + 1
+            while j < len(positions) and positions[j] == "~":
+                duration += 1
+                j += 1
 
         duration_line[i] = _number_to_char(duration)
         i += 1
