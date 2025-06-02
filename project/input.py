@@ -122,6 +122,12 @@ pattern12 = """
 
 x	x	x	x	x	x	x	x	4Ab-9	~	~	~	~	x	x	5C-9
 5Eb-9	5F-9	4F-9	~	x	x	x	x	x	x	x	x	x	x	x	x
+
+4C-9	~	3Ab-9	~	3F-9	~	3Db-9	~	3C-9	~	3Ab-9	~	4C-9	~	4Eb-9	~
+3F-9	~	3Ab-9	~	4C-9	~	4F-9	~	2Ab-9	~	3Ab-9	~	4Ab-9	~	4C-9-I	~
+
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+2Bb-9	~	x	x	x	x	x	x	x	x	x	x	x	x	x	x
 """
 
 __patterns__: list[str] = [
