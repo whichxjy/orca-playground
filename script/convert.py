@@ -136,7 +136,6 @@ def _convert_segment(positions: list[str]) -> str:
         note_line[i] = note_info.note
         velocity_line[i] = note_info.velocity
 
-        print(f"{pos} => {note_info}")
         # 确定持续时间
         if note_info.explicit_duration is not None:
             # 使用显式指定的持续时间
