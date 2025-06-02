@@ -68,6 +68,17 @@ pattern7 = """
 3Db-5	~	3Ab-5	~	4Db-5	~	4Eb-5	~	2Bb-6	~	3F-7	~	4Db-8	~	4C-9	~
 """
 
+pattern8 = """
+6C-9	~	~	~	5F-9	~	~	~	5Ab-9	~	~	~	~	~	5Ab-9	5F-9
+~	~	~	~	~	~	5F-9	~	6Eb-9	~	6Db-9	~	6C-9	~	5Ab-9	~
+
+5C-9	~	~	~	4F-9	~	~	~	4Ab-9	~	~	~	~	~	4Ab-9	4F-9
+~	~	~	~	~	~	4F-9	~	5Eb-9	~	5Db-9	~	5C-9	~	4Ab-9	~
+
+2Ab-9	~	3F-9	~	3Ab-9	~	4C-9	~	3C-9	~	3Ab-9	~	4C-9	~	4Eb-9	~
+3Db-9	~	3Ab-9	~	4Db-9	~	4Eb-9	~	2Bb-9	~	3F-9	~	4Db-9	~	4C-9	~
+"""
+
 __patterns__: list[str] = [
     pattern0,
     pattern1,
@@ -77,5 +88,6 @@ __patterns__: list[str] = [
     pattern5,
     pattern6,
     pattern7,
+    pattern8,
 ]
 __output_path__ = "project/patterns"
