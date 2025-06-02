@@ -11,7 +11,7 @@ patterns_dir.mkdir(parents=True, exist_ok=True)
 for i, pattern in enumerate(__patterns__):
     result = convert_music_notation(pattern) + "\n"
 
-    file_path = patterns_dir / f"pattern-{i:0{num_digits}d}.txt"
+    file_path = patterns_dir / f"pattern{i:0{num_digits}d}.orca"
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(result)
         print(f"generate pattern: {file_path}")
