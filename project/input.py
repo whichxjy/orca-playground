@@ -132,13 +132,13 @@ x	x	x	x	4C-9	~	x	x	x	x	x	x	x	x	x	x
 
 pattern12 = """
 5C-9	6Ab-9	~	~	6F-9	~	~	4Bb-9	5Bb-9	~	~	~	~	5F-9	~	6C-9
-6Eb-9	6F-9	5F-9	~	5C-9	6C-9	~	~	~	~	~	~	5Eb-9	5Eb-9	5Eb-9-I	~
+6Eb-9	6F-9	5F-9	~	5C-9	6C-9	~	~	~	~	~	~	5Eb-9	5Eb-9	5Eb-9-Y	~
 
 x	x	x	x	x	x	x	x	4Ab-9	~	~	~	~	x	x	5C-9
 5Eb-9	5F-9	4F-9	~	x	x	x	x	x	x	x	x	x	x	x	x
 
 4C-9	~	3Ab-9	~	3F-9	~	3Db-9	~	3C-9	~	3Ab-9	~	4C-9	~	4Eb-9	~
-3F-9	~	3Ab-9	~	4C-9	~	4F-9	~	2Ab-9	~	3Ab-9	~	4Ab-9	~	4C-9-I	~
+3F-9	~	3Ab-9	~	4C-9	~	4F-9	~	2Ab-9	~	3Ab-9	~	4Ab-9	~	4C-9-Y	~
 
 x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
 2Bb-9	~	x	x	x	x	x	x	x	x	x	x	x	x	x	x
