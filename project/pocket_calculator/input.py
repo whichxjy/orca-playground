@@ -1,8 +1,8 @@
 pattern0 = """
-5C-5	4D#-5	5F#-5	3F-5	5C-5	3G#-5	~	~	~	~	~	~	~	~	~	~
-~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
+5C-A	4D#-A	5F#-A	3F-A	5C-A	3G#-A	x	x	x	x	x	x	x	x	x	x
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
 """
 
 
 __patterns__: list[str] = [pattern0]
-__output_path__ = "project/patterns"
+__output_path__ = "project/pocket_calculator/patterns"
