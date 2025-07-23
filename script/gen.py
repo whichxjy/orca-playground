@@ -1,6 +1,6 @@
 from script.convert import convert_music_notation
 from pathlib import Path
-from project.input import __patterns__, __output_path__
+from project.avril_14th.input import __patterns__, __output_path__
 
 
 total_patterns = len(__patterns__)
