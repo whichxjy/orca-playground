@@ -159,4 +159,4 @@ __patterns__: list[str] = [
     pattern11,
     pattern12,
 ]
-__output_path__ = "project/patterns"
+__output_path__ = "project/avril_14th/patterns"

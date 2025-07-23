@@ -1,2 +1,2 @@
 #!/bin/bash
-uv run python script/gen.py
+uv run python gen.py
