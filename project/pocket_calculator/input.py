@@ -1,13 +1,17 @@
 pattern0 = """
-5C-A	4D#-A	5F#-A	3F-A	5C-A	3G#-A	x	x	x	x	x	x	x	x	x	x
-5C-A	4D#-A	5F#-A	3F-A	5C-A	3G#-A	x	x	x	x	x	x	x	x	x	x
+6C-E	5D#-E	6F#-E	4F-E	6C-E	4G#-E	x	x	x	x	x	x	x	x	x	x
+6F#-E	5G-E	5D#-E	4F-E	6C-E	7E-E	6C-E	4A-E	7F-E	x	x	x	x	x	x	x
 """
 
 pattern1 = """
-6C-A	5D#-A	6F#-A	4F-A	6C-A	4G#-A	x	x	x	x	x	x	x	x	x	x
-6C-A	5D#-A	6F#-A	4F-A	6C-A	4G#-A	x	x	x	x	x	x	x	x	x	x
+6C-E	x	6C-E	5D#-E	6F#-E	4F-E	6C-E	4G#-E	x	x	x	x	x	x	x	x
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
 """
 
+pattern2 = """
+6F#-E	5G-E	5D#-E	4F-E	6C-E	7E-E	6C-E	4A-E	7F-E	x	x	x	x	x	x	x
+x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+"""
 
-__patterns__: list[str] = [pattern0, pattern1]
+__patterns__: list[str] = [pattern0, pattern1, pattern2]
 __output_path__ = "project/pocket_calculator/patterns"
