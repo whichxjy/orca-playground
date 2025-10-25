@@ -22,10 +22,10 @@ pattern1 = """
 
 pattern2 = """
 6C-5	~	~	~	5F-5	~	~	~	5Ab-5	~	~	~	~	~	5Ab-5	5F-5
-~	~	~	~	x	x	x	x	x	x	x	x	x	x	x	x
+~	~	~	~	~	~	~	~	x	x	x	x	x	x	x	x
 
 5C-5	~	~	~	4F-5	~	~	~	4Ab-5	~	~	~	~	~	4Ab-5	4F-5
-~	~	~	~	x	x	x	x	x	x	x	x	x	x	x	x
+~	~	~	~	~	~	~	~	x	x	x	x	x	x	x	x
 
 2Ab-5	~	3F-5	~	3Ab-5	~	4C-5	~	3C-5	~	3Ab-5	~	4C-5	~	4Eb-5	~
 3Db-5	~	3Ab-5	~	4Db-5	~	4Eb-5	~	2Bb-5	~	3F-5	~	4Db-5	~	4C-5	~
