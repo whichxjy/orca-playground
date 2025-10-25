@@ -1,7 +1,7 @@
-from script.convert import convert_music_notation
 from pathlib import Path
-from project.pocket_calculator.input import __patterns__, __output_path__
 
+from project.avril_14th.input import __output_path__, __patterns__
+from script.convert import convert_music_notation
 
 total_patterns = len(__patterns__)
 num_digits = len(str(total_patterns - 1))
