@@ -47,7 +47,7 @@ def _char_to_number(c: str) -> int:
         return int(c)
     if "A" <= c <= "Z":
         return ord(c) - ord("A") + 10
-    raise ValueError(f"invalid char for numner: {c}")
+    raise ValueError(f"invalid char for number: {c}")
 
 
 def _is_halfwidth(char: str) -> bool:
