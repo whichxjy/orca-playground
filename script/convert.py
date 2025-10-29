@@ -12,6 +12,19 @@ DEFAULT_TEMPLATE = """
 #................................#
 """.strip()
 
+# Pre-defined constant dictionaries for note conversion (moved from _convert_note)
+WHITE_KEYS = {"C", "D", "E", "F", "G", "A", "B"}
+FLAT_MAP = {"Db": "c", "Eb": "d", "Gb": "f", "Ab": "g", "Bb": "a"}
+SHARP_MAP = {"C#": "c", "D#": "d", "F#": "f", "G#": "g", "A#": "a"}
+
+# Header line constant (moved from _convert_segment)
+HEADER_LINE = "#1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#"
+
+# Compiled regex patterns for better performance
+NOTE_PATTERN = re.compile(r"(\d)([A-G][b#]?)-([0-9A-F]+)(?:-([1-9]|[A-Z]))?")
+PARAGRAPH_PATTERN = re.compile(r"\n\s*\n")
+WHITESPACE_PATTERN = re.compile(r"\s+")
+
 
 class NodeInfo(BaseModel):
     octave: str
@@ -38,40 +51,40 @@ def _char_to_number(c: str) -> int:
 
 
 def _is_halfwidth(char: str) -> bool:
-    # 控制字符 (U+0000 到 U+001F) 和 DEL (U+007F)
-    if ord(char) <= 0x1F or ord(char) == 0x7F:
+    """Check if a character is halfwidth (more efficient version)."""
+    code_point = ord(char)
+    # Control characters (U+0000 to U+001F) and DEL (U+007F)
+    # ASCII characters (U+0020 to U+007E)
+    if code_point <= 0x7E:
         return True
-    # ASCII字符 (U+0020 到 U+007E)
-    if 0x20 <= ord(char) <= 0x7E:
-        return True
-    # 半角片假名 (U+FF61 到 U+FF9F)
-    if 0xFF61 <= ord(char) <= 0xFF9F:
+    # Half-width katakana (U+FF61 to U+FF9F)
+    if 0xFF61 <= code_point <= 0xFF9F:
         return True
     return False
 
 
 def _parse_music_notation(input_text: str) -> list[str]:
+    """Parse music notation into segments (optimized version)."""
     if not input_text:
         return []
 
+    # Validate all characters are halfwidth (optimized to avoid repeated checks)
     for c in input_text:
         if not _is_halfwidth(c):
             raise ValueError("invalid input")
 
-    paragraphs = re.split(r"\n\s*\n", input_text.strip())
+    paragraphs = PARAGRAPH_PATTERN.split(input_text.strip())
     all_segments: list[str] = []
 
     for paragraph in paragraphs:
         lines = [line.strip() for line in paragraph.split("\n") if line.strip()]
-        segment_positions = []
-
-        for line in lines:
-            line_positions = re.split(r"\s+", line)
-            segment_positions.append(line_positions)
-
-        flattened_segment = []
-        for row in segment_positions:
-            flattened_segment.extend(row)
+        
+        # Flatten segments more efficiently - use list comprehension
+        flattened_segment = [
+            position
+            for line in lines
+            for position in WHITESPACE_PATTERN.split(line)
+        ]
 
         if len(flattened_segment) != 32:
             raise ValueError("must be 32 notes each segments")
@@ -81,28 +94,25 @@ def _parse_music_notation(input_text: str) -> list[str]:
 
 
 def _convert_note(note_str: str) -> NodeInfo | None:
+    """Convert note string to NodeInfo (optimized version)."""
     if note_str == "x":  # 休止符
         return None
 
-    # 匹配格式: 八度+音符+力度
-    match = re.match(r"(\d)([A-G][b#]?)-([0-9A-F]+)(?:-([1-9]|[A-Z]))?", note_str)
+    # 匹配格式: 八度+音符+力度 (using compiled pattern)
+    match = NOTE_PATTERN.match(note_str)
     if not match:
         raise ValueError(f"invalid note: {note_str}")
 
     octave, note, velocity, duration = match.groups()
     octave = int(octave) - 1  # 转换八度表示
 
-    # 处理音符转换
-    white_keys = ["C", "D", "E", "F", "G", "A", "B"]
-    flat_map = {"Db": "c", "Eb": "d", "Gb": "f", "Ab": "g", "Bb": "a"}
-    sharp_map = {"C#": "c", "D#": "d", "F#": "f", "G#": "g", "A#": "a"}
-
-    if note in white_keys:
+    # 处理音符转换 (using module-level constants)
+    if note in WHITE_KEYS:
         converted_note = note
-    elif note in flat_map:
-        converted_note = flat_map[note]
-    elif note in sharp_map:
-        converted_note = sharp_map[note]
+    elif note in FLAT_MAP:
+        converted_note = FLAT_MAP[note]
+    elif note in SHARP_MAP:
+        converted_note = SHARP_MAP[note]
     else:
         converted_note = note.lower()
 
@@ -115,10 +125,12 @@ def _convert_note(note_str: str) -> NodeInfo | None:
 
 
 def _convert_segment(positions: list[str]) -> str:
-    octave_line = ["." for _ in range(32)]
-    note_line = ["." for _ in range(32)]
-    velocity_line = ["." for _ in range(32)]
-    duration_line = ["." for _ in range(32)]
+    """Convert a segment of positions to Orca format (optimized version)."""
+    # Pre-allocate lists with dots
+    octave_line = ["."] * 32
+    note_line = ["."] * 32
+    velocity_line = ["."] * 32
+    duration_line = ["."] * 32
 
     i = 0
     while i < len(positions):
@@ -154,18 +166,19 @@ def _convert_segment(positions: list[str]) -> str:
         duration_line[i] = _number_to_char(duration)
         i += 1
 
-    # 格式化输出
-    header_line = "#1e=a2e=a3e=a4e=a1e=a2e=a3e=a4e=a#"  # 固定的标记行
+    # 格式化输出 - use pre-formatted strings and reduce concatenations
+    octave_str = "".join(octave_line)
+    note_str = "".join(note_line)
+    velocity_str = "".join(velocity_line)
+    duration_str = "".join(duration_line)
 
-    result = [
-        header_line,
-        "#" + "".join(octave_line) + "#",
-        "#" + "".join(note_line) + "#",
-        "#" + "".join(velocity_line) + "#",
-        "#" + "".join(duration_line) + "#",
-    ]
-
-    return "\n".join(result)
+    return (
+        f"{HEADER_LINE}\n"
+        f"#{octave_str}#\n"
+        f"#{note_str}#\n"
+        f"#{velocity_str}#\n"
+        f"#{duration_str}#"
+    )
 
 
 def convert_music_notation(input_text: str) -> str:
