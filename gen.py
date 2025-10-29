@@ -4,7 +4,6 @@ This script processes music notation patterns and converts them to Orca format.
 It supports processing multiple projects efficiently.
 """
 from pathlib import Path
-import sys
 
 from project.avril_14th.input import __output_path__, __patterns__
 from script.convert import convert_music_notation
